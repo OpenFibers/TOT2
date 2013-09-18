@@ -55,6 +55,7 @@ module FileSystemHelper
 			Zip::ZipFile.open(zip_file_path) do |zipfile|
 			zipfile.each { |zipentry|
 				matched_name = /Payload\/\w+\.app\//.match(zipentry.name)
+				matched_name = /Payload\/\b([\w-]+\s?[\w-]*)+\b\.app\//.match(zipentry.name)	
 				return matched_name.to_s if matched_name
 			}
 			end
