@@ -85,12 +85,17 @@ start()
 	path=`dirname $0`
 	cd $path
 	RAILS_ENV=production thin start -d $@;
-	sleep 5s
-	if [[ -e ./tmp/pids/thin.pid ]]; then
-		echo 'TOT server started'
-	else
-		echo 'TOT server start failed, run rails s -e production for more info'
-	fi
+
+# failed after 10 seconds
+	for (( i = 0; i < 20 ; i ++ )) do
+	    sleep 0.5s
+		if [[ -e ./tmp/pids/thin.pid ]]; then
+			echo 'TOT server started'
+			return
+		fi
+	done
+
+	echo 'TOT server start failed, run rails s -e production for more info'
 }
 
 stop()
