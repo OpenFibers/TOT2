@@ -84,7 +84,7 @@ start()
 {
 	path=`dirname $0`
 	cd $path
-	RAILS_ENV=production thin start -d $@;
+	RAILS_ENV=production bundle exec thin start -d $@;
 
 # failed after 10 seconds
 	for (( i = 0; i < 20 ; i ++ )) do
