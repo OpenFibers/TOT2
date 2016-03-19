@@ -60,6 +60,7 @@
       <th>Download</th>
       <td>
           <%= link_to 'ipa', root_url + @app_version.ipa_download_url %>
+          | <%= link_to 'manifest', root_url + 'getmanifest/' + @app_version.id.to_s %>
           <% if (can? :manage, App) && @app_version.dsym_path %>
           | <%= link_to 'dSYM', root_url + @app_version.dsym_download_url %>
           <% end %>
