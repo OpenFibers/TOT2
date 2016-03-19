@@ -120,7 +120,7 @@ rootuser()
 {
 	path=`dirname $0`
 	cd $path
-	RAILS_ENV=production rake db:seed;
+	RAILS_ENV=production bundle exec rake db:seed;
 }
 
 resetdb()
@@ -128,7 +128,7 @@ resetdb()
 	echo 'resetting db'
 	path=`dirname $0`
 	cd $path
-	RAILS_ENV=production rake db:reset;
+	RAILS_ENV=production bundle exec rake db:reset;
 	rm -rf ./public/uploads/*
 }
 
