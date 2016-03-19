@@ -75,8 +75,8 @@
 
     <%# external manifest link %>
     <tr>
-      <th>External Manifest URL</th>
-      <td><%= f.text_field :external_manifest_url, :size => "48" %></td>
+      <th>External Manifest URL </th>
+      <td><%= f.text_field :external_manifest_url, :size => "48" %> <br>( For non-HTTPS TOT2 server :<br>Put manifest file in a place where enabled https (like dropbox), then set the external manifest url here. )</td>
     </tr>
 
     <%# update dSYM %>
