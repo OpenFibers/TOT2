@@ -45,11 +45,7 @@
     </div>
 
     <div class="installButton" style="margin-top:7px;">
-      <% if @app_version.external_manifest_url && @app_version.external_manifest_url.length != 0 %>
-        <a href="itms-services://?action=download-manifest&url=<%= @app_version.external_manifest_url %>"><img width="100px;" height="44px;" src="<%= assets_path %>/InstallButton.png"></a>
-      <% else %>
-        <a href="itms-services://?action=download-manifest&url=<%= root_url %>getmanifest/<%= @app_version.id.to_s %>"><img width="100px;" height="44px;" src="<%= assets_path %>/InstallButton.png"></a>
-      <% end %>
+      <a href="itms-services://?action=download-manifest&url=<%= get_encoded_manifest_url(@app_version) %>"><img width="100px;" height="44px;" src="<%= assets_path %>/InstallButton.png"></a>
     </div>
     <div style="height:7px; background:#f3f3f3;"></div></div>
 <% end %>

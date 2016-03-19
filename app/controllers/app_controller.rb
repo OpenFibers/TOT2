@@ -2,6 +2,7 @@ class AppController < ApplicationController
 
   require 'manifest_helper'
 
+  helper_method :get_encoded_manifest_url
   layout :resolve_layout
   before_filter :check_user_agent, :only => [:applist, :version_detail, :more_version]
 
@@ -54,6 +55,14 @@ class AppController < ApplicationController
       host_url = url_for(request.scheme + "://" + request.host_with_port + '/')
       manifest_data = ManifestHelper.gen_manifest(host_url, app_version)
       send_data(manifest_data, :filename=>'manifest.plist')
+    end
+  end
+
+  def get_encoded_manifest_url(app_version)
+    if app_version
+      host_url = url_for(request.scheme + "://" + request.host_with_port + '/')
+      manifest_url = ManifestHelper.get_manifest_url(host_url, app_version)
+      encoded_url = URI.encode_www_form_component(manifest_url)
     end
   end
 
