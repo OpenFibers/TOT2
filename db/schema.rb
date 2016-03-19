@@ -11,23 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724144706) do
+ActiveRecord::Schema.define(:version => 20160319113349) do
 
   create_table "app_versions", :force => true do |t|
-    t.integer  "beta_version",        :default => 0,               :null => false
-    t.string   "app_name",            :default => "",              :null => false
-    t.string   "version",             :default => "",              :null => false
-    t.string   "short_version",       :default => "",              :null => false
+    t.integer  "beta_version",          :default => 0,               :null => false
+    t.string   "app_name",              :default => "",              :null => false
+    t.string   "version",               :default => "",              :null => false
+    t.string   "short_version",         :default => "",              :null => false
     t.datetime "release_date"
-    t.text     "change_log",          :default => "",              :null => false
-    t.string   "ipa_path",                                         :null => false
+    t.text     "change_log",            :default => "",              :null => false
+    t.string   "ipa_path",                                           :null => false
     t.string   "dsym_path"
     t.string   "icon_path"
     t.string   "itunes_artwork_path"
-    t.string   "uploader_email",      :default => "unknown email", :null => false
-    t.integer  "app_id",                                           :null => false
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
+    t.string   "uploader_email",        :default => "unknown email", :null => false
+    t.integer  "app_id",                                             :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+    t.string   "external_manifest_url"
   end
 
   add_index "app_versions", ["app_id"], :name => "index_app_versions_on_app_id"
