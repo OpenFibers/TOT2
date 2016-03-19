@@ -77,6 +77,16 @@ class AppAdminController < ApplicationController
       alert_string = nil
     end
 
+    post_hash = params[:app_version]
+    new_external_manifest_url = post_hash["external_manifest_url"] if post_hash
+    if new_external_manifest_url
+      @app_version.external_manifest_url = new_external_manifest_url
+      @app_version.save
+
+      notice_string = "Edit Saved."
+      alert_string = nil
+    end
+
     uploaded_dSYM_io = params[:dsym]
     if uploaded_dSYM_io
       if !dSYM_io_type_available?(uploaded_dSYM_io)

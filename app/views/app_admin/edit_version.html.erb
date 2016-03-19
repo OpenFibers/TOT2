@@ -52,7 +52,7 @@
     <%# change log %>
     <tr>
       <th>Change Log</th>
-      <td><%= f.text_area :change_log, :rows => 10, :size => "24x6" %></td>
+      <td><%= f.text_area :change_log, :rows => 10, :size => "48x6" %></td>
     </tr>
 
     <%# download %>
@@ -60,11 +60,23 @@
       <th>Download</th>
       <td>
           <%= link_to 'ipa', root_url + @app_version.ipa_download_url %>
+
           | <%= link_to 'manifest', root_url + 'getmanifest/' + @app_version.id.to_s %>
+
+          <% if @app_version.external_manifest_url %>
+          | <%= link_to 'external manifest', @app_version.external_manifest_url %>
+          <% end %>
+
           <% if (can? :manage, App) && @app_version.dsym_path %>
           | <%= link_to 'dSYM', root_url + @app_version.dsym_download_url %>
           <% end %>
       </td>
+    </tr>
+
+    <%# external manifest link %>
+    <tr>
+      <th>External Manifest URL</th>
+      <td><%= f.text_field :external_manifest_url, :size => "48" %></td>
     </tr>
 
     <%# update dSYM %>
