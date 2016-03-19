@@ -1,5 +1,6 @@
 module ManifestHelper
   class << self 
+
     def gen_manifest(host_url, app_version)
       ipa_download_link = host_url + app_version.ipa_download_url
       bundle_id = app_version.app.bundle_id
@@ -39,6 +40,16 @@ module ManifestHelper
       text += '  </dict>'
       text += '</plist>'
       return text
+    end
+
+    def get_manifest_url(host_url, app_version)
+      manifest_url = ""
+      if app_version.external_manifest_url && app_version.external_manifest_url.length != 0
+        manifest_url = app_version.external_manifest_url
+      else
+        manifest_url = host_url + 'getmanifest/' + app_version.id.to_s
+      end
+      return manifest_url
     end
   end
 end
