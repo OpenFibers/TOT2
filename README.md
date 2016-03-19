@@ -25,13 +25,13 @@ Use sqlite 3
 
 #How to use
 
-####1.Download TOT2 or clone it to your server.  
+#### 1.Download TOT2 or clone it to your server.  
 
 ```
 $ git clone https://github.com/OpenFibers/TOT2.git
 ```
 
-####2.Init the rails server
+#### 2.Init the rails server
 
 ```
 $ cd TOT2
@@ -40,14 +40,32 @@ $ ./tot setup
 
 A default admin account with email: ***tot@tot.com***, password: ***totadmin*** will be generated.
 
-####3.Start the rails server
+#### 3.Start the rails server
 
 ```
 $ ./tot start
 ```
-Run this script at server start time to make the TOT2 server keep alive.
+Run this script at server start time to make the TOT2 server keep alive.  
 
-####4.Upload ipa and dSYM files  
+You may want to config SSL certificate:  
+
+```
+./tot start --ssl --ssl-verify --ssl-key-file ssllocal/server.key --ssl-cert-file ssllocal/server.crt
+```
+
+Or another server port:
+
+```
+$ ./tot start -p 3001
+```
+
+More server options, check:
+
+```
+$ thin --help
+```
+
+#### 4.Upload ipa and dSYM files  
 
 Open [http://your-ip-or-host-of-rails-server:3000/admin](http://your-ip-or-host-of-rails-server:3000/admin)  
 Login use default admin account with email: ***tot@tot.com***, password: ***totadmin***.  
@@ -65,7 +83,7 @@ Then you can see your uploaded apps in 'Apps' tab.
 
 ![Manage App](https://raw.github.com/OpenFibers/TOT2/master/ScreenShots/3.manageapp.png)
 
-####5.Download apps in iOS devices
+#### 5.Download apps in iOS devices
 
 Open [http://your-ip-or-host-of-rails-server:3000](http://your-ip-or-host-of-rails-server:3000) on iOS devices.  
 Download apps.  
@@ -74,13 +92,20 @@ Download apps.
 
 ![Download](https://raw.github.com/OpenFibers/TOT2/master/ScreenShots/5.download.png)
 
-####6.Stop TOT2 server
+#### 6.If no SSL certificate configured for TOT2 server
+
+* In app version's edit page of admin panel, download the manifest file.
+* Upload manifest file to some cloud drive which supports HTTPS external links, like DropBox, then share the manifest file and get the shared link.
+* Set the shared link in 'External Manifest URL', click 'Confirm Change'.
+* Download the beta-test app from devices.
+
+#### 7.Stop TOT2 server
 
 ```
 $ ./tot stop
 ```
 
-####7.Config mail sender
+#### 8.Config mail sender
 
 Open 'config/initializers/devise.rb', change the code below
 
@@ -108,7 +133,7 @@ to
 +    :password => 'yourpassword'
 ```
 
-####8.Reset admin account if forgot
+#### 9.Reset admin account if forgot
 
 Just run ***rake db:seed*** to reset default account:
 
@@ -119,7 +144,7 @@ $ ./tot reset rootuser
 
 Restart server, then you can login the TOT2 admin page, [http://your-ip-or-host-of-rails-server:3000/admin] with email: ***tot@tot.com***, password: ***totadmin***.
 
-####9.Reset data base.  
+#### 10.Reset data base.  
 
 ```
 $ cd TOT2
