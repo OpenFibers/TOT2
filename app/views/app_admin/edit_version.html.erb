@@ -63,7 +63,7 @@
 
           | <%= link_to 'manifest', root_url + 'getmanifest/' + @app_version.id.to_s %>
 
-          <% if @app_version.external_manifest_url %>
+          <% if @app_version.external_manifest_url && @app_version.external_manifest_url.length != 0 %>
           | <%= link_to 'external manifest', @app_version.external_manifest_url %>
           <% end %>
 
