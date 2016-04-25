@@ -67,7 +67,7 @@ module BinaryPlistHelper
 		# get display name from hash
 		def get_display_name(parsed_plist_hash)
 			return nil if !parsed_plist_hash
-			return parsed_plist_hash["CFBundleDisplayName"]
+			return parsed_plist_hash["CFBundleDisplayName"] || parsed_plist_hash["CFBundleName"]
 		end
 	end
 end
