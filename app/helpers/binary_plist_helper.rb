@@ -21,23 +21,25 @@ module BinaryPlistHelper
 		def get_icon_file_name(parsed_plist_hash)
 			return nil if (!parsed_plist_hash || !parsed_plist_hash.respond_to?(:has_value?))
 
-			icon_array = parsed_plist_hash["CFBundleIconFiles"] # first find parsed_plist_hash["CFBundleIconFiles"].last
-			if !icon_array || icon_array.length == 0 # then find parsed_plist_hash["CFBundleIcons"]["CFBundlePrimaryIcon"]["CFBundleIconFiles"].lastObject
-				bundle_icons = parsed_plist_hash["CFBundleIcons"]
-				if bundle_icons
-					primary_icon = bundle_icons["CFBundlePrimaryIcon"]
-					if primary_icon
-						icon_array = primary_icon["CFBundleIconFiles"]
+			# first find parsed_plist_hash["CFBundleIconFiles"].last
+			icon_array = parsed_plist_hash["CFBundleIconFiles"]
+			if icon_array && icon_array.length != 0
+				return icon_array.last
+			end
+
+			# then find parsed_plist_hash["CFBundleIcons"]["CFBundlePrimaryIcon"]["CFBundleIconFiles"].lastObject
+			bundle_icons = parsed_plist_hash["CFBundleIcons"]
+			if bundle_icons && bundle_icons.length != 0
+				primary_icon = bundle_icons["CFBundlePrimaryIcon"]
+				if primary_icon && primary_icon.length != 0
+					icon_array = primary_icon["CFBundleIconFiles"]
+					if icon_array && icon_array.length != 0
+						return icon_array.last + "@2x.png"
 					end
 				end
 			end
 
-			if icon_array && icon_array.length != 0
-				return icon_array.last
-			else
-				return parsed_plist_hash["CFBundleIconFile"]
-			end
-
+			# else return "CFBundleIconFile"
 			return parsed_plist_hash["CFBundleIconFile"]
 		end
 
